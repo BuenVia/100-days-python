@@ -9,7 +9,7 @@ canvas = Canvas(root, width=600, height=300)
 canvas.grid(columnspan=3)
 
 # Logo
-logo = Image.open("logo.png")
+logo = Image.open("./pdf_extract/logo.png")
 logo = ImageTk.PhotoImage(logo)
 logo_label = Label(image=logo)
 logo_label.image = logo
