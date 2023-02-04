@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
+import json
 
 WHITE = "#fff"
 
@@ -30,19 +31,51 @@ def pwd_generator():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
 
+    website = web_input.get()
+    email = email_input.get()
+    pwd = pwd_input.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": pwd
+            }
+        }
+
     if web_input.get() == "" or pwd_input.get() == "":
         messagebox.showinfo(title="Error", message="You are missing some info")
     else:
-        data_entry = f"{web_input.get()} | {email_input.get()} | {pwd_input.get()} \n"
+        try:
+            with open("./password-generator/data.json", "r") as data_file:
+                #Reading old data
+                data = json.load(data_file)
+        except FileNotFoundError:
+            with open("./password-generator/data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        else:
+            data.update(new_data)
 
-        is_ok = messagebox.askokcancel(title=web_input.get(), message=f"Are you sure you want to submit: \nWebsite: {web_input.get()} \nUser: {email_input.get()} \nPassword: {pwd_input.get()}")
-        
-        if is_ok:
-            with open("./password-generator/data.txt", "a") as data_file:
-                data_file.write(data_entry)
+            with open("./password-generator/data.json", "w") as data_file:
+                #Saving updated data
+                json.dump(data, data_file, indent=4)
+        finally:
             web_input.delete(0, END)
             pwd_input.delete(0, END)
             web_input.focus()
+
+
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
+def search_password():
+    website = web_input.get()
+    try:
+        with open("./password-generator/data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(message="No Data File Found")
+    else:
+        if website in data:
+            messagebox.showinfo(title=website, message=f"Email: {data[website]['email']} \nPassword: {data[website]['password']}")
+        else:
+            messagebox.showinfo(message="No details for the website exists")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -66,7 +99,7 @@ pwd_label.grid(column=0, row=3)
 
 # Inputs
 web_input = Entry(width=35)
-web_input.grid(column=1, row=1, columnspan=2, sticky=W)
+web_input.grid(column=1, row=1, sticky=W)
 web_input.focus()
 email_input = Entry(width=35)
 email_input.insert(0, "matthewclifford@hotmail.co.uk")
@@ -75,6 +108,8 @@ pwd_input = Entry(width=21)
 pwd_input.grid(column=1, row=3, sticky=W)
 
 # Button
+search_btn = Button(text="Search", bg=WHITE, command=search_password)
+search_btn.grid(column=2, row=1)
 pwd_btn = Button(text="Generate Password", bg=WHITE, command=pwd_generator)
 pwd_btn.grid(column=2, row=3)
 add_btn = Button(text="Add", bg=WHITE, width=36, command=save)
