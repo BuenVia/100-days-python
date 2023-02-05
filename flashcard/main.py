@@ -3,12 +3,13 @@ import pandas
 import random
 BACKGROUND_COLOR = "#B1DDC6"
 
+data_file = pandas.read_csv("./flashcard/data/spanish_words.csv")
+word_list = data_file.to_dict(orient="records")
+
 def new_word():
-    data_file = pandas.read_csv("./flashcard/data/spanish_words.csv")
-    word_list = pandas.DataFrame(data_file)
-    x = word_list.to_dict(orient="records")
-    print(x)
-    card_title.itemconfigure(text=)
+    current_card = random.choice(word_list)
+    canvas.itemconfigure(card_title, text="Spanish")
+    canvas.itemconfigure(card_text, text=current_card["Spanish"])
 
 window = Tk()
 window.minsize(width=900, height=700)
@@ -31,5 +32,6 @@ correct_btn = Button(image=correct_img, highlightthickness=0, command=new_word)
 wrong_btn.grid(column=0, row=1)
 correct_btn.grid(column=1, row=1)
 
+new_word()
 
 window.mainloop()
