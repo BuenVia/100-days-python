@@ -1,11 +1,12 @@
 import requests
 import smtplib
+import os
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-API_KEY = "6LZBKIIKYGUMS2FN"
+API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
 MY_EMAIL = "biffbuchanan1985@gmail.com"
-MY_PASSWORD = "ttqlmucjwavxzxza"
+MY_PASSWORD = os.environ.get("GMAIL_BB_PASSWORD")
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
