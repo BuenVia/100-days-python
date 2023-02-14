@@ -10,10 +10,10 @@
 
 import datetime as dt
 import random
-import smtplib
+import smtplib, os
 
 my_email = "biffbuchanan1985@gmail.com"
-my_password = "ttqlmucjwavxzxza"
+my_password = os.environ.get("GMAIL_BB_PASSWORD")
 
 today = dt.datetime.now()
 month = today.month

@@ -6,10 +6,10 @@ Delorean_1985"""
 
 import smtplib
 import datetime as dt
-import random
+import random, os
 
 my_email = "biffbuchanan1985@gmail.com"
-password = "ttqlmucjwavxzxza"
+password = os.environ.get("GMAIL_BB_PASSWORD")
 
 now = dt.datetime.now()
 if now.weekday() == 0:

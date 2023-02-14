@@ -1,12 +1,12 @@
 import requests
 from datetime import datetime
 import smtplib
-import time
+import time, os
 
 MY_LAT = 51.903763 # Your latitude
 MY_LONG = -0.196612 # Your longitude
 MY_EMAIL = "biffbuchanan1985@gmail.com"
-MY_PASSWORD = "ttqlmucjwavxzxza"
+MY_PASSWORD = os.environ.get("GMAIL_BB_PASSWORD")
 
 def iss_nearby():
     response = requests.get(url="http://api.open-notify.org/iss-now.json")

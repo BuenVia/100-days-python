@@ -2,9 +2,9 @@ import requests
 import os
 from twilio.rest import Client
 
-API_KEY = "1b4285cacb852ff76f4aa122cc7bc8d1"
-account_sid = 'AC1c6aee0b64379f2a3d9a8436ec0e0f34'
-auth_token = '697c98fca8a56b8e2ec3d127388d850b'
+API_KEY = os.environ.get("OPENWEATHER_API_KEY")
+account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
 
 weather_params = {
     "lat": -39.642799,
