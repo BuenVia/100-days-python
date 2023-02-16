@@ -1,7 +1,8 @@
-import requests
+import requests, datetime, os
 
-APP_ID='053a27e5'
-API_KEY='857492f554ede2fbeea6d65e36c1309a'
+APP_ID=os.environ.get("APP_ID")
+API_KEY=os.environ.get("API_KEY")
+AUTH_KEY=os.environ.get("AUTH_KEY")
 
 sheety_endpoint = "https://api.sheety.co/1b44c2fc74da196fc5e0fa22856b14ca/workoutTracking/sheet1"
 
@@ -16,30 +17,40 @@ headers = {
     # "x-remote-user-id": 0
 }
 
-# exercise_input = input("How far did you run?: ")
+exercise_input = input("How far did you run?: ")
 
-# parameters = {
-#  "query": exercise_input,
-#  "gender":GENDER,
-#  "weight_kg":WEIGHT,
-#  "height_cm":HEIGHT,
-#  "age":AGE
-# }
-
-# response = requests.post("https://trackapi.nutritionix.com/v2/natural/exercise", headers=headers, json=parameters)
-# response.raise_for_status()
-# exercise = response.json()
-
-sheety_body = {
-    "sheet1": {
-        "date": 1,
-        "time": 2,
-        "exercise": 3,
-        "duration": 22,
-        "calories": 10,
-    }
+parameters = {
+ "query": exercise_input,
+ "gender":GENDER,
+ "weight_kg":WEIGHT,
+ "height_cm":HEIGHT,
+ "age":AGE
 }
 
-sheety_response = requests.post(sheety_endpoint, json=sheety_body)
-sheety_response.raise_for_status()
-print(sheety_response.text)
+response = requests.post("https://trackapi.nutritionix.com/v2/natural/exercise", headers=headers, json=parameters)
+response.raise_for_status()
+exercises = response.json()
+
+for exercise in exercises['exercises']:
+    today = datetime.datetime.now()
+    date = today.strftime('%d/%m/%Y')
+    time = today.strftime("%X")
+    print(date)
+
+    sheety_body = {
+        "sheet1": {
+            "date": date,
+            "time": time,
+            "exercise": exercise["name"],
+            "duration": exercise["duration_min"],
+            "calories": exercise["nf_calories"],
+        }
+    }
+
+    headers = {
+        "Authorization": AUTH_KEY
+    }
+
+    sheety_response = requests.post(sheety_endpoint, json=sheety_body, headers=headers)
+    sheety_response.raise_for_status()
+    print(sheety_response.text)
