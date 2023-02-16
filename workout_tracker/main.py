@@ -31,7 +31,7 @@ headers = {
 # exercise = response.json()
 
 sheety_body = {
-    "sheet": {
+    "sheet1": {
         "date": 1,
         "time": 2,
         "exercise": 3,
