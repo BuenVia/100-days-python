@@ -13,3 +13,5 @@ class FlightData:
         self.return_airline = return_airline
         self.out_airline_no = out_airline_no
         self.return_airline_no = return_airline_no
+        self.stop_overs = 0,
+        self.via_city=""
