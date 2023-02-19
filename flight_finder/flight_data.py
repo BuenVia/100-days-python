@@ -1,15 +1,15 @@
-import requests
-
-API_KEY = "rNC69JGbGRhOJHV4bcKVkyI4Zj4YvXwH"
-
-tequila_endpoint = "https://tequila-api.kiwi.com"
 
 class FlightData:
-
-    def get_iata_codes(self, city):
-        locations_endpoint = f"{tequila_endpoint}/locations/query"
-        headers = {"apikey": API_KEY}
-        parameters = {"term": city, "location_types": "city"}
-        response = requests.get(url=locations_endpoint, headers=headers, params=parameters)
-        results = response.json()['locations']
-        return results[0]['code']
+    
+    def __init__(self, price, origin_city, origin_airport, destination_city, destination_airport, out_date, return_date, out_airline, out_airline_no, return_airline, return_airline_no):
+        self.price = price
+        self.origin_city = origin_city
+        self.origin_airport = origin_airport
+        self.destination_city = destination_city
+        self.destination_airport = destination_airport
+        self.out_date = out_date
+        self.return_date = return_date
+        self.out_airline = out_airline
+        self.return_airline = return_airline
+        self.out_airline_no = out_airline_no
+        self.return_airline_no = return_airline_no
