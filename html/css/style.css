@@ -1,9 +1,141 @@
+:root {
+    --bkg-clr: rgb(238, 238, 238);
+    --card-bkg-clr: rgb(255, 255, 255);
+    --txt-clr: rgb(44, 44, 44);
+    --trim-clr: rgb(119, 82, 183);
+    --btn-hover-clr: rgb(116, 91, 205);
+    --txt-hover-clr: rgb(200, 200, 180);
+    --alt-border-clr: rgb(24, 24, 24);
+    --alt-shadow-clr: rgb(119, 82, 183); 
+}
+
 *, *::after, *::before {
-    padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
 body {
-    background-color: blue;
+    background-color: var(--bkg-clr);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--txt-clr);
+}
+
+header {
+    display: flex;
+    justify-content: right;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.print {
+    padding: 1rem 1rem 0 0;
+    text-align: right;
+
+}
+
+.main-body {
+    margin: 2rem 0;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.section {
+    padding: 1.5rem;
+}
+
+.info-section {
+    padding: 1rem 0 1rem .5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: var(--trim-clr);
+    color: var(--bkg-clr);
+}
+
+.photo-section {
+    margin: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-container {
+    width: 100%;
+}
+
+.profile-pic {
+    height: 150px;
+    border-radius: 10px;
+}
+
+.links {
+    width: 100%;
+}
+
+.title {
+    margin-bottom: .5rem;
+    padding: .25rem;
+    width: fit-content;
+    background-color: var(--trim-clr);
+    color: rgb(240, 240, 240);
+}
+
+.title-section {
+    width: 100%;
+}
+
+.bold {
+    font-weight: 600;
+    color: white;
+}
+
+.contact {
+    color: var(--txt-hover-clr);
+}
+
+.title-section a {
+    text-decoration: none;
+    color:  var(--txt-hover-clr);
+}
+
+.job_section {
+    padding: .25rem;
+}
+
+.job-title {
+    color: var(--trim-clr);
+}
+
+.company-title {
+    text-decoration: underline;
+}
+
+.lang-section {
+    margin-top: 1rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.flag {
+    height: 50px;
+    margin-bottom: .5rem;
+    border-radius: 10px;
+    box-shadow: 2px 3px 8px;
+}
+
+li {
+    list-style:square;
+    
 }
